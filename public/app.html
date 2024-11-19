@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    .container {
+      text-align: center;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .file-link {
+      margin: 20px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Employee System</h1>
+    <div>
+      <form onsubmit="formsubmit(event)">
+        <input placeholder="name" name="name" />
+        <input placeholder="status" name="status" />
+        <input type="submit" value="Add Emploayee" />
+      </form>
+    </div>
+    <div id="root"></div>
+  <div class="container">
+    <div id="input-fields">
+      <label for="file-upload" class="button">Choose File</label>
+      <input type="file" id="file-upload" class="hidden" />
+      <button id="upload-button" class="button">Upload File</button>
+    </div>
+    <div id="file-data" class="hidden">
+      <a href="#" id="file-link" class="file-link" target="_blank"></a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

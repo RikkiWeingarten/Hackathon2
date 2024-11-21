@@ -1,21 +1,21 @@
 import express from "express";
-import employeeRouter from "./routes/employeesRouter.js";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-// Get the current file path and directory name (equivalent to __dirname)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import { files_router } from "./routes/upload.routes.js";
+import router from "./routes/employees.routes.js";
+dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-const PORT = 3001;
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
-app.listen(PORT, () => {
-  console.log(`Running on ${PORT}`);
+app.listen(process.env.PORT || 4000, () => {
+  console.log(`run on ${process.env.PORT || 4000}`);
 });
+app.use("/", files_router);
+app.use("/", express.static(path.resolve() + "/public"));
 
-app.use("/", express.static(`${__dirname}/public`));
-
-app.use("/employees", employeeRouter);
+app.use("/employees", router);

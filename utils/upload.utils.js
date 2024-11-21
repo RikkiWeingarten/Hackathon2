@@ -3,7 +3,6 @@ import multer from "multer";
 import path from "path";
 import { s3 } from "../config/aws.s3.config.js";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 export const upload = multer({

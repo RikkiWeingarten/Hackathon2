@@ -1,14 +1,12 @@
 import { Router } from "express";
-import { upload } from "../utils/upload.utils.js";
 import {
   getAllEmployees,
   deleteEmployee,
   updateEmployee,
   addEmployee,
   getEmployeeById,
-  searchEmployees,
-  _uploadSingle,
-} from "../controllers/employeesController.js";
+  searchEmployees
+} from "../controllers/employees.controllers.js";
 
 const router = Router();
 
@@ -36,6 +34,6 @@ router.post("/", addEmployee);
 router.get("/all/:employee_id", getEmployeeById);
 router.get("/search", searchEmployees);
 
-router.post("/upload-single", upload.single("file"), _uploadSingle);
+
 
 export default router;

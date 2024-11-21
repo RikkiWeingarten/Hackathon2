@@ -1,4 +1,4 @@
-import { getAllEmployeesDB, getEmployeeByIdDB, insertEmployeeDB, uploadSingle } from "../models/employeesData.js";
+import { getAllEmployeesDB, getEmployeeByIdDB, insertEmployeeDB } from "../models/employees.models.js";
 
 const getAllEmployees = async (req, res) => {
   try {
@@ -22,7 +22,7 @@ const deleteEmployee = (req, res) => {
 
 const updateEmployee = (req, res) => {
   const { id } = req.params;
-  const { name, status, image } = req.body;
+  const { name, status} = req.body;
 
   const index = employees.findIndex((item) => item.id == id);
 
@@ -30,16 +30,16 @@ const updateEmployee = (req, res) => {
     return res.status(404).send("employee to update not found");
   }
 
-  employees[index] = { ...employees[index], name, status, image };
+  employees[index] = { ...employees[index], name, status,};
 
   res.json(employees);
 };
 
 const addEmployee = async (req, res) => {
   console.log(req.body);
-  const { name, status, image } = req.body;
+  const { name, status } = req.body;
   try {
-    const data = await insertEmployeeDB(name, status, image);
+    const data = await insertEmployeeDB(name, status);
     res.json(data);
   } catch (error) {
     console.log(error);
@@ -77,25 +77,7 @@ const searchEmployees = (req, res) => {
   res.json(filtered);
 };
 
-const _uploadSingle = async ({ employee_id, image }) => {
-    try {
-      const [uploadResult] = await uploadSingle(employee_id, image);
 
-      return { message: "Image uploaded successfully" };
-    } catch (err) {
-      console.error(err);
-      throw new Error("Failed to upload image");
-    }
-};
-
-// const _uploadSingle = async (req, res) => {
-//     try {
-//       const row = await uploadSingle(req.file);
-//       res.json(row);
-//     } catch (error) {
-//       res.status(500).json({ message: error.message });
-//     }
-// };
 
 export {
   getAllEmployees,
@@ -103,6 +85,6 @@ export {
   updateEmployee,
   addEmployee,
   getEmployeeById,
-  searchEmployees,
-  _uploadSingle,
+  searchEmployees
+
 };
